@@ -1,0 +1,38 @@
+.sidebar {
+    height: 100%;
+    width: 280px;
+    background-color: white;
+    z-index: 1;
+    border-right: 1px solid #d5d5d5;
+    overflow-y: scroll;
+    position: fixed;
+    overflow-x: hidden;
+  }
+  .sidebar ul {
+    list-style: none;
+    margin-left: -40px;
+  }
+  .sidebar ul li {
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .sidebar-responsive {
+    width: 100px;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+  
+    background-color: white;
+  }
+  .sidebar-responsive ul {
+    list-style: none;
+  
+    margin-left: -25px;
+  }
+  .sidebar-responsive ul li {
+    padding: 8px 0px;
+    font-size: 14px;
+    display: block;
+  }

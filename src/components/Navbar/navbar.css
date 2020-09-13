@@ -1,0 +1,24 @@
+.btn-toggle {
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 22px;
+  }
+  .btn-toggle:hover {
+    background: transparent;
+    border: none;
+    color: black;
+  }
+  .youtube-logo {
+    height: 60px;
+    margin-left: -10px;
+  }
+  .youtube-name {
+    font-weight: 700;
+    line-height: 36px;
+    margin-left: -20px;
+  }
+  .bg-light {
+    background: white !important;
+    height: 70px;
+  }
