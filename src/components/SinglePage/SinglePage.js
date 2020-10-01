@@ -15,6 +15,8 @@ export default class SinglePage extends Component {
       channelID:"",
       showText:false,
       viewReply:false,
+      relatedVideos:[],
+      isHovered:false,
 
     }
 
@@ -65,11 +67,27 @@ console.log(response.data.items[0].snippet.channelId);
       .catch((error) => console.log(error));
 
   }
+  getRelatedVideos=(id)=>{
+    Axios.get(
+      "https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId="+id.get("v")+"&type=video&key=AIzaSyAOJj_IHEdUyR5_FaxHqaUu9iJdTQhpwuk"
+    )
+      .then((response) => {
+        console.log("relatedvideos",response);
+       
+        this.setState({
+          relatedVideos:response.data.items,
+         
+        });
+      })
+      .catch((error) => console.log(error));
+
+  }
   componentDidMount() {
     const search=this.props.location.search;
     const id=new URLSearchParams(search);
     this.getVideos(id);
     this.getComments(id);
+    this.getRelatedVideos(id);
 
     
   }
@@ -83,6 +101,9 @@ console.log(response.data.items[0].snippet.channelId);
   }
   toggleReply = () =>{
     this.setState({ viewReply: !this.state.viewReply });
+  }
+  onHover = () =>{
+    this.setState({ isHovered: !this.state.isHovered });
   }
 
   render() {
@@ -216,8 +237,40 @@ console.log(response.data.items[0].snippet.channelId);
       
        </div>
        <div className="col-md-4">
-      
-       </div>
+      {/* {this.state.relatedVideos.map((related)=>{
+        return(
+          <Fragment> */}
+          <div className="row">
+          <div className="col-md-5" onMouseEnter={this.onHover} onMouseLeave={this.onHover}>
+          {/* <img src={related.snippet.thumbnails.default.url} style={{width:"172px",height:"102px"}} /> */}
+          <img src="https://i.ytimg.com/vi/2Go1ok0Xagk/default.jpg" style={{width:"172px",height:"102px"}} />
+          </div>
+          <div className="col-md-7" style={{color:"#606060",position:"relative"}}>
+          {/* <span style={{fontSize:"15px",fontWeight:"500"}}>{related.snippet.title.substring(0,65)}</span>
+          <small>{related.snippet.channelTitle}</small>
+          <small>{Moment(related.snippet.publishedAt).fromNow()}</small> */}
+           <span style={{fontSize:"15px",fontWeight:"500",color:"#000"}}>Solution Challenge Demo Day 2020 Project: CoronAI</span>
+           <br />
+           <small>Google Developers</small><br />
+          <small>2.3k Views</small><i className="fa fa-circle px-2" style={{ fontSize: "4px" }} ></i>
+          <small>11 years ago</small>
+          </div>
+          {this.state.isHovered?<div style={{position:"absolute",left:"154px",color:"#fff",top:"54px"}}>
+          <i className="fa fa-clock-o px-2" style={{ fontSize: "20px",backgroundColor:"#000"}} ></i></div>:''}
+          <div style={{position:"absolute",left:"152px",color:"#fff",top:"80px"}}>
+          <span style={{ fontSize: "14px",backgroundColor:"#606060"}} >01:01</span></div>
+          
+        
+  
+          </div>
+          <hr />
+          {/* </Fragment>
+        ); 
+       
+  
+   
+      })} */}
+    </div>
        {/* <div className="row" style={{justifyContent:"space-between"}}></div> */}
        {/* <div style={{backgroundColor:"black",height:"200px",width:"20%"}} ></div>
        <div style={{backgroundColor:"green",height:"200px",width:"20%"}} ></div>
